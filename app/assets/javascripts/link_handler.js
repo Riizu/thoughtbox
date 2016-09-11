@@ -2,7 +2,24 @@ $(document).ready(function() {
   $('.read-status-button').on('click', updateReadStatus);
   $('#filter-read').on('click', filterRead);
   $('#filter-unread').on('click', filterUnread);
+  $('#search').on('input', filterSearch);
 });
+
+function filterSearch() {
+  var targetVal = $('#search').val();
+  var links = $('.link');
+
+  links.each(function(link) {
+    var url = $(this).find('.url').text();
+    var title = $(this).find('.title').text();
+    
+    if(title.includes(targetVal) || url.includes(targetVal)) {
+      $(this).show();
+    } else {
+      $(this).hide();
+    }
+  });
+}
 
 function filterRead() {
   var links = $('.link');

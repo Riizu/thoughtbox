@@ -1,5 +1,6 @@
 class LinksController < ApplicationController
-    def index
-        redirect_to "/login"
-    end
+  before_action :authorize
+
+  def index
+  end
 end

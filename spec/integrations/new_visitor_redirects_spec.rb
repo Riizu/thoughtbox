@@ -12,7 +12,7 @@ RSpec.feature 'A new visitor is redirected appropriately' do
             expect(page).to have_field "Email"
             expect(page).to have_field "Password"
 
-            expect(page).to have_button "Login"
+            expect(page).to have_button "Log In"
             expect(page).to have_button "Sign Up"
         end
 

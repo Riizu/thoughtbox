@@ -8,6 +8,7 @@ FactoryGirl.define do
   factory :link do
     url
     title "Test Link"
+    user
   end
 
   sequence :url do |n|

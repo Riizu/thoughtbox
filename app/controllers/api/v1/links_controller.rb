@@ -13,6 +13,6 @@ class Api::V1::LinksController < ApiBaseController
   private
 
   def update_params
-    params.permit(:read, :title, :url)
+    params.permit(:id, :read, :title, :url)
   end
 end

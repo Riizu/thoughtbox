@@ -1,0 +1,7 @@
+<%= form_for(@link) do |f| %>
+  <%= f.label :title, "Title", value: @link.title %>
+  <%= f.text_field :title %><br>
+  <%= f.label :url, "URL", value: @link.url %>
+  <%= f.text_field :url %><br>
+  <%= f.submit "Update Thought" %>
+<% end %>

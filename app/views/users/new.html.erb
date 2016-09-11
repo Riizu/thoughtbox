@@ -1,0 +1,9 @@
+<%= form_for(:user, url: users_path) do |f| %>
+    <span class="email"><%= f.label :email, "Email" %></span>
+    <%= f.text_field :email %><br>
+    <span class="password"><%= f.label :password, "Password" %></span>
+    <%= f.password_field :password %><br>
+    <span class="password-confirmation"><%= f.label :password_confirmation, "Password Confirmation" %></span>
+    <%= f.password_field :password_confirmation %><br>
+    <%= f.submit "Create Account"%>
+<% end %>

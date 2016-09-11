@@ -1,0 +1,19 @@
+Welcome <%= current_user.email %>
+<%= link_to "Sign Out", "/logout" %>
+
+<%= form_for(:link, url: links_path, :html => {class: "new-thought-form"}) do |f| %>
+    <span class="title"><%= f.label :title, "Title" %></span>
+    <%= f.text_field :title %><br>
+    <span class="URL"><%= f.label :url, "URL" %></span>
+    <%= f.text_field :url %><br>
+    <%= f.submit "Submit Thought"%>
+<% end %>
+
+<% @links.each do |link| %>
+  <div id="link-<%= link.id %>" class="read-<%= link.read.to_s %>" data-id="<%= link.id %>" data-read="<%= link.read %>">
+    <div><%= link.title %></div>
+    <div><%= link_to link.url.to_s, link.url %></div>
+    <div class="read-status-button">Click to mark <%= link.read ? 'Read' : 'Unread' %></div>
+    <%= button_to "Edit", edit_link_path(link), method: :get %>
+  </div>
+<% end %>

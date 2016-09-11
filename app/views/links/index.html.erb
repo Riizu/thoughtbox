@@ -14,5 +14,6 @@ Welcome <%= current_user.email %>
     <div><%= link.title %></div>
     <div><%= link_to link.url.to_s, link.url %></div>
     <div class="read-status-button">Click to mark <%= link.read ? 'Read' : 'Unread' %></div>
+    <%= button_to "Edit", edit_link_path(link), method: :get %>
   </div>
 <% end %>

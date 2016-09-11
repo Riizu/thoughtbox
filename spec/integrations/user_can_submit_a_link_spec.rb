@@ -6,14 +6,14 @@ RSpec.feature "A user can submit a new link to their collection" do
       user = create(:user)
       login_user(user)
 
-      within ".new-url-form" do
+      within ".new-thought-form" do
         fill_in "Title", with: "A place where you can search for anything!"
         fill_in "URL", with: "http://google.com"
-        click_on "submit"
+        click_on "Submit Thought"
       end
 
       expect(current_path).to eq root_path
-      expect(Link.length).to eq 1
+      expect(Link.count).to eq 1
 
       created_link = Link.first
 
@@ -33,15 +33,15 @@ RSpec.feature "A user can submit a new link to their collection" do
       user = create(:user)
       login_user(user)
 
-      within ".new-url-form" do
+      within ".new-thought-form" do
         fill_in "Title", with: "A place where you can search for anything!"
         fill_in "URL", with: "sdgsg"
-        click_on "submit"
+        click_on "Submit Thought"
       end
 
       expect(current_path).to eq root_path
-      expect(Link.length).to eq 0
-      expect(page).to have_content "Please enter a valid URL"
+      expect(Link.count).to eq 0
+      expect(page).to have_content "Url is not a valid URL"
     end
   end
 end

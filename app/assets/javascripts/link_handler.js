@@ -12,7 +12,7 @@ function filterSearch() {
   links.each(function(link) {
     var url = $(this).find('.url').text();
     var title = $(this).find('.title').text();
-    
+
     if(title.includes(targetVal) || url.includes(targetVal)) {
       $(this).show();
     } else {
@@ -21,7 +21,8 @@ function filterSearch() {
   });
 }
 
-function filterRead() {
+function filterRead(e) {
+  e.preventDefault();
   var links = $('.link');
   links.each(function(link) {
     if($(this).hasClass("read-true")) {
@@ -32,7 +33,8 @@ function filterRead() {
   });
 }
 
-function filterUnread() {
+function filterUnread(e) {
+  e.preventDefault();
   var links = $('.link');
   links.each(function(link) {
     if($(this).hasClass("read-false")) {
@@ -44,6 +46,7 @@ function filterUnread() {
 }
 
 function updateReadStatus(e) {
+  e.preventDefault();
   var targetLink = $(this.parentElement);
 
   $.ajax({

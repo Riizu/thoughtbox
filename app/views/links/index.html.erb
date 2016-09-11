@@ -9,8 +9,8 @@ Welcome <%= current_user.email %>
     <%= f.submit "Submit Thought"%>
 <% end %>
 
-<div id="filter-read"> Filter Read </div>
-<div id="filter-unread"> Filter Unread </div>
+<button id="filter-read"> Filter Read </button>
+<button id="filter-unread"> Filter Unread </button>
 
 <%= form_tag do%>
     <%= label_tag :search, "Search" %></span>
@@ -21,7 +21,7 @@ Welcome <%= current_user.email %>
   <div id="link-<%= link.id %>" class="link read-<%= link.read.to_s %>" data-id="<%= link.id %>" data-read="<%= link.read %>">
     <div class="title"><%= link.title %></div>
     <div class="url"><%= link_to link.url.to_s, link.url %></div>
-    <div class="read-status-button">Click to mark <%= link.read ? 'Read' : 'Unread' %></div>
+    <button class="read-status-button">Click to mark <%= link.read ? 'Read' : 'Unread' %></button>
     <%= button_to "Edit", edit_link_path(link), method: :get %>
   </div>
 <% end %>

@@ -1,6 +1,30 @@
 $(document).ready(function() {
   $('.read-status-button').on('click', updateReadStatus);
+  $('#filter-read').on('click', filterRead);
+  $('#filter-unread').on('click', filterUnread);
 });
+
+function filterRead() {
+  var links = $('.link');
+  links.each(function(link) {
+    if($(this).hasClass("read-true")) {
+      $(this).hide();
+    } else {
+      $(this).show();
+    }
+  });
+}
+
+function filterUnread() {
+  var links = $('.link');
+  links.each(function(link) {
+    if($(this).hasClass("read-false")) {
+      $(this).hide();
+    } else {
+      $(this).show();
+    }
+  });
+}
 
 function updateReadStatus(e) {
   var targetLink = $(this.parentElement);

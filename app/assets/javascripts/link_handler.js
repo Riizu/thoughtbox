@@ -58,11 +58,11 @@ function updateReadStatus(e) {
     if(json.read) {
       targetLink.data("read", true);
       targetLink.toggleClass('read-false read-true');
-      targetLink.find('.read-status-button').html("Click to mark Read");
+      targetLink.find('.read-status-button').html("Click to mark Unread");
     } else {
       targetLink.data("read", false);
       targetLink.toggleClass('read-true read-false');
-      targetLink.find('.read-status-button').html("Click to mark Unread");
+      targetLink.find('.read-status-button').html("Click to mark Read");
     }
   });
 }

@@ -14,7 +14,12 @@ class LinksController < ApplicationController
   end
 
   def edit
-    @link = Link.find(params[:id])
+    if current_user.links.exists?(params[:id])
+      @link = Link.find(params[:id])
+    else
+      flash[:error] = "You do not have permission to access that page"
+      redirect_to root_path
+    end
   end
 
   def update

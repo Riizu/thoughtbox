@@ -13,8 +13,6 @@ RSpec.feature "A user can edit their links" do
 
       expect(current_path).to eq edit_link_path(link.id)
 
-      save_and_open_page
-
       fill_in "link_title", with: "Some other link"
       fill_in "link_url", with: "http://google.com"
       click_on "Update Thought"
@@ -29,9 +27,10 @@ RSpec.feature "A user can edit their links" do
   end
 
   context "invalid" do
-    scenario "They attempt to access the edit page for a link that isn't theirs'" do
+    scenario "They attempt to access the edit page for a link that isn't theirs" do
       user = create(:user)
       unowned_link = create(:link)
+
       login_user(user)
 
       visit edit_link_path(unowned_link)

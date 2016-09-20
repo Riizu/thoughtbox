@@ -61,5 +61,22 @@ RSpec.feature "A user can filter the links in their collection", js: true do
 
       expect(page).to have_selector(".link", visible: true, count: 1)
     end
+
+    scenario "They filter alphabetically" do
+      user = create(:user)
+      link_1 = create(:link, title: "Alpha", user: user)
+      link_2 = create(:link, title: "Echo", user: user)
+      link_3 = create(:link, title: "Zulu", user: user)
+
+      login_user(user)
+
+      click_on 'Filter A-Z'
+
+      links = page.all(".link .title")
+      
+      expect(links[0].text).to eq link_1.title
+      expect(links[1].text).to eq link_2.title
+      expect(links[2].text).to eq link_3.title
+    end
   end
 end

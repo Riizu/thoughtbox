@@ -1,7 +1,6 @@
 $(document).ready(function() {
   $('.read-status-button').on('click', updateReadStatus);
-  $('#filter-read').on('click', filterRead);
-  $('#filter-unread').on('click', filterUnread);
+  $('#filter-read, #filter-unread').on('click', filterReadByStatus);
   $('#search').on('input', filterSearch);
 });
 
@@ -21,23 +20,13 @@ function filterSearch() {
   });
 }
 
-function filterRead(e) {
+function filterReadByStatus(e) {
   e.preventDefault();
+  var targetStatus = this.id === "filter-read" ? "true" : "false";
   var links = $('.link');
-  links.each(function(link) {
-    if($(this).hasClass("read-true")) {
-      $(this).hide();
-    } else {
-      $(this).show();
-    }
-  });
-}
 
-function filterUnread(e) {
-  e.preventDefault();
-  var links = $('.link');
   links.each(function(link) {
-    if($(this).hasClass("read-false")) {
+    if($(this).hasClass("read-" + targetStatus)) {
       $(this).hide();
     } else {
       $(this).show();

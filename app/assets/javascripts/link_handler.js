@@ -1,7 +1,6 @@
 $(document).ready(function() {
   $('.read-status-button').on('click', updateReadStatus);
-  $('#filter-read').on('click', filterRead);
-  $('#filter-unread').on('click', filterUnread);
+  $('#filter-read, #filter-unread').on('click', filterReadByStatus);
   $('#search').on('input', filterSearch);
 });
 
@@ -21,23 +20,13 @@ function filterSearch() {
   });
 }
 
-function filterRead(e) {
+function filterReadByStatus(e) {
   e.preventDefault();
+  var targetStatus = this.id === "filter-read" ? "true" : "false";
   var links = $('.link');
-  links.each(function(link) {
-    if($(this).hasClass("read-true")) {
-      $(this).hide();
-    } else {
-      $(this).show();
-    }
-  });
-}
 
-function filterUnread(e) {
-  e.preventDefault();
-  var links = $('.link');
   links.each(function(link) {
-    if($(this).hasClass("read-false")) {
+    if($(this).hasClass("read-" + targetStatus)) {
       $(this).hide();
     } else {
       $(this).show();
@@ -58,11 +47,11 @@ function updateReadStatus(e) {
     if(json.read) {
       targetLink.data("read", true);
       targetLink.toggleClass('read-false read-true');
-      targetLink.find('.read-status-button').html("Click to mark Read");
+      targetLink.find('.read-status-button').html("Click to mark Unread");
     } else {
       targetLink.data("read", false);
       targetLink.toggleClass('read-true read-false');
-      targetLink.find('.read-status-button').html("Click to mark Unread");
+      targetLink.find('.read-status-button').html("Click to mark Read");
     }
   });
 }

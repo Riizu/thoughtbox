@@ -5,6 +5,7 @@ $(document).ready(function() {
 });
 
 function filterSearch() {
+  e.preventDefault();
   var targetVal = $('#search').val();
   var links = $('.link');
 

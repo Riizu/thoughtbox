@@ -1,8 +1,9 @@
 $(document).ready(function() {
   $('.read-status-button').on('click', updateReadStatus);
-  $('#filter-read').on('click', filterRead);
-  $('#filter-unread').on('click', filterUnread);
+  $('#filter-read, #filter-unread').on('click', filterReadByStatus);
+  $('#filter-az').on('click', filterAlphabetically);
   $('#search').on('input', filterSearch);
+  $('.search-form').submit(function(e) { e.preventDefault(); });
 });
 
 function filterSearch() {
@@ -21,11 +22,13 @@ function filterSearch() {
   });
 }
 
-function filterRead(e) {
+function filterReadByStatus(e) {
   e.preventDefault();
+  var targetStatus = this.id === "filter-read" ? "true" : "false";
   var links = $('.link');
+
   links.each(function(link) {
-    if($(this).hasClass("read-true")) {
+    if($(this).hasClass("read-" + targetStatus)) {
       $(this).hide();
     } else {
       $(this).show();
@@ -33,16 +36,26 @@ function filterRead(e) {
   });
 }
 
-function filterUnread(e) {
-  e.preventDefault();
+function unhideAllLinks() {
   var links = $('.link');
+
   links.each(function(link) {
-    if($(this).hasClass("read-false")) {
-      $(this).hide();
-    } else {
-      $(this).show();
-    }
+    $(this).show();
   });
+}
+
+function filterAlphabetically(e) {
+  e.preventDefault();
+
+  var links = $('.links');
+  var listitems = links.children('.link').get();
+  
+  unhideAllLinks();
+
+  listitems.sort(function(a, b) {
+    return $(a).find('.title').text().toUpperCase().localeCompare($(b).find('.title').text().toUpperCase());
+  });
+  $.each(listitems, function(idx, itm) { links.append(itm); });
 }
 
 function updateReadStatus(e) {
@@ -58,11 +71,11 @@ function updateReadStatus(e) {
     if(json.read) {
       targetLink.data("read", true);
       targetLink.toggleClass('read-false read-true');
-      targetLink.find('.read-status-button').html("Click to mark Read");
+      targetLink.find('.read-status-button').html("Click to mark Unread");
     } else {
       targetLink.data("read", false);
       targetLink.toggleClass('read-true read-false');
-      targetLink.find('.read-status-button').html("Click to mark Unread");
+      targetLink.find('.read-status-button').html("Click to mark Read");
     }
   });
 }

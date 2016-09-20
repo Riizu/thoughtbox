@@ -9,19 +9,22 @@ Welcome <%= current_user.email %>
     <%= f.submit "Submit Thought"%>
 <% end %>
 
-<button id="filter-read"> Filter Read </button>
-<button id="filter-unread"> Filter Unread </button>
+<button id="filter-read">Filter Read</button>
+<button id="filter-unread">Filter Unread</button>
+<button id="filter-az">Filter A-Z</button>
 
-<%= form_tag do%>
+<%= form_tag(",", {class: 'search-form'}) do %>
     <%= label_tag :search, "Search" %></span>
     <%= text_field_tag :search %><br>
 <% end %>
 
-<% @links.each do |link| %>
-  <div id="link-<%= link.id %>" class="link read-<%= link.read.to_s %>" data-id="<%= link.id %>" data-read="<%= link.read %>">
-    <div class="title"><%= link.title %></div>
-    <div class="url"><%= link_to link.url.to_s, link.url %></div>
-    <button class="read-status-button">Click to mark <%= link.read ? 'Read' : 'Unread' %></button>
-    <%= button_to "Edit", edit_link_path(link), method: :get %>
-  </div>
-<% end %>
+<div class="links">
+  <% @links.each do |link| %>
+    <div id="link-<%= link.id %>" class="link read-<%= link.read.to_s %>" data-id="<%= link.id %>" data-read="<%= link.read %>">
+      <div class="title"><%= link.title %></div>
+      <div class="url"><%= link_to link.url.to_s, link.url %></div>
+      <button class="read-status-button">Click to mark <%= link.read ? 'Unread' : 'Read' %></button>
+      <%= button_to "Edit", edit_link_path(link), method: :get %>
+    </div>
+  <% end %>
+</div>

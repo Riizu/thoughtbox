@@ -36,11 +36,22 @@ function filterReadByStatus(e) {
   });
 }
 
+function unhideAllLinks() {
+  var links = $('.link');
+
+  links.each(function(link) {
+    $(this).show();
+  });
+}
+
 function filterAlphabetically(e) {
   e.preventDefault();
 
   var links = $('.links');
   var listitems = links.children('.link').get();
+  
+  unhideAllLinks();
+
   listitems.sort(function(a, b) {
     return $(a).find('.title').text().toUpperCase().localeCompare($(b).find('.title').text().toUpperCase());
   });

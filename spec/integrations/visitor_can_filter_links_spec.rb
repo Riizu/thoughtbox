@@ -29,5 +29,37 @@ RSpec.feature "A user can filter the links in their collection", js: true do
       expect(page).to have_selector("#link-#{read_link.id}", visible: true)
       expect(page).to have_selector("#link-#{unread_link.id}", visible: false) 
     end
+
+    scenario "They enter a search that matches everything" do
+      user = create(:user)
+      create_list(:link, 10, user: user)
+      login_user(user)
+
+      fill_in 'Search', with: "Test Link"
+
+      expect(page).to have_selector(".link", visible: true, count: 10)
+    end
+
+    scenario "They enter a search that matches nothing" do
+      user = create(:user)
+      create_list(:link, 10, user: user)
+      login_user(user)
+
+      fill_in 'Search', with: "xxxxx"
+
+      expect(page).to have_selector(".link", visible: false, count: 10)
+    end
+
+    scenario "They enter a search that matches one result" do
+      user = create(:user)
+      links = create_list(:link, 10, user: user)
+      target_link = links.first
+
+      login_user(user)
+
+      fill_in 'Search', with: target_link.url
+
+      expect(page).to have_selector(".link", visible: true, count: 1)
+    end
   end
 end

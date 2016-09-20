@@ -2,10 +2,10 @@ $(document).ready(function() {
   $('.read-status-button').on('click', updateReadStatus);
   $('#filter-read, #filter-unread').on('click', filterReadByStatus);
   $('#search').on('input', filterSearch);
+  $('.search-form').submit(function(e) { e.preventDefault(); });
 });
 
 function filterSearch() {
-  e.preventDefault();
   var targetVal = $('#search').val();
   var links = $('.link');
 

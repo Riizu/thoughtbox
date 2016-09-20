@@ -12,7 +12,7 @@ Welcome <%= current_user.email %>
 <button id="filter-read"> Filter Read </button>
 <button id="filter-unread"> Filter Unread </button>
 
-<%= form_tag do%>
+<%= form_tag(",", {class: 'search-form'}) do %>
     <%= label_tag :search, "Search" %></span>
     <%= text_field_tag :search %><br>
 <% end %>
